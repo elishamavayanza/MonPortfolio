@@ -134,15 +134,33 @@ nav {
 
 .nav-links li {
     margin-left: 30px;
+    position: relative;
 }
 
 .nav-links a {
     font-weight: 600;
     transition: var(--transition);
+    position: relative;
+    padding: 5px 0;
 }
 
 .nav-links a:hover {
     color: var(--primary-color);
+}
+
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
 }
 
 .theme-toggle {
@@ -452,16 +470,16 @@ footer {
     .hero-content, .about-content, .contact-content {
         flex-direction: column;
     }
-    
+
     .hero-text, .hero-image, .about-text, .skills, .contact-info, .contact-form {
         padding: 0;
         margin-bottom: 40px;
     }
-    
+
     .hero-text h1 {
         font-size: 2.5rem;
     }
-    
+
     .footer-content {
         flex-direction: column;
         gap: 30px;
@@ -472,16 +490,15 @@ footer {
     .nav-links {
         display: none;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .theme-toggle {
         margin-left: 10px;
     }
 }
-
 
 /* Styles pour l'arrière-plan dynamique */
 .background-slider {
@@ -520,7 +537,4 @@ footer {
     overflow: hidden;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 1;
-}
+

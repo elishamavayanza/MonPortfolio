@@ -10,9 +10,12 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             // Insérer le header au début du body
             document.body.insertAdjacentHTML("afterbegin", data);
-            
+
             // Initialiser le toggle de thème après le chargement du header
             initThemeToggle();
+
+            // Mettre en évidence le lien actif dans la navigation
+            setActiveNavLink();
         })
         .catch(error => {
             console.error("Erreur lors du chargement du header:", error);
@@ -38,13 +41,13 @@ document.addEventListener("DOMContentLoaded", function() {
     function initThemeToggle() {
         const themeToggle = document.getElementById("theme-toggle");
         const body = document.body;
-        
+
         if (!themeToggle) return;
-        
+
         // Vérifier le thème sauvegardé ou la préférence système
         const savedTheme = localStorage.getItem("theme");
         const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        
+
         if (savedTheme === "dark-mode" || (!savedTheme && systemPrefersDark)) {
             body.classList.add("dark-mode");
             body.classList.remove("light-mode");
@@ -54,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
             body.classList.remove("dark-mode");
             themeToggle.textContent = "🌙";
         }
-        
+
         // Gérer le clic sur le bouton de thème
         themeToggle.addEventListener("click", function() {
             if (body.classList.contains("light-mode")) {
@@ -69,6 +72,23 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Fonction pour mettre en évidence le lien de navigation actif
+    function setActiveNavLink() {
+        // Récupérer le nom du fichier de la page actuelle
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
-    
+        // Sélectionner tous les liens de navigation
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        // Parcourir les liens et ajouter la classe 'active' au lien correspondant
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+
+            // Vérifier si le lien correspond à la page actuelle
+            if (linkHref === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    }
+
 });
