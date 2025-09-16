@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Mettre en évidence le lien actif dans la navigation
             setActiveNavLink();
+
+            // Initialiser le menu mobile après le chargement du header
+            initMobileMenu();
         })
         .catch(error => {
             console.error("Erreur lors du chargement du header:", error);
@@ -78,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
         // Sélectionner tous les liens de navigation
-        const navLinks = document.querySelectorAll('.nav-links a');
+        const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
 
         // Parcourir les liens et ajouter la classe 'active' au lien correspondant
         navLinks.forEach(link => {
@@ -91,4 +94,47 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Fonction pour initialiser le menu mobile
+    function initMobileMenu() {
+        // Utiliser un délai pour s'assurer que le DOM est complètement chargé
+        setTimeout(() => {
+            const menuToggle = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+
+            if (!menuToggle || !mobileMenu) {
+                console.error("Éléments du menu mobile non trouvés");
+                return;
+            }
+
+            // Créer l'overlay pour le menu mobile
+            const menuOverlay = document.createElement('div');
+            menuOverlay.className = 'menu-overlay';
+            document.body.appendChild(menuOverlay);
+
+            // Gérer l'ouverture/fermeture du menu
+            menuToggle.addEventListener("click", function() {
+                mobileMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+                document.body.classList.toggle('no-scroll');
+            });
+
+            // Fermer le menu quand on clique sur l'overlay
+            menuOverlay.addEventListener("click", function() {
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            });
+
+            // Gérer les clics sur les liens du menu mobile
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    // Fermer le menu
+                    mobileMenu.classList.remove('active');
+                    menuOverlay.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                });
+            });
+        }, 100);
+    }
 });
