@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publier - Mon Portfolio</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="light-mode">
+<!-- Header sera chargé dynamiquement par include.js -->
+
+<!-- Section de publication -->
+<section class="publish-section">
+    <div class="container">
+        <div class="post-form" id="post-form-section">
+            <h3>Ajouter une nouvelle publication</h3>
+            <form id="new-post-form">
+                <div class="form-group">
+                    <label for="post-content">Contenu de la publication :</label>
+                    <textarea id="post-content" placeholder="Écrivez votre publication ici..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="post-media">Ajouter une image (optionnel) :</label>
+                    <input type="file" id="post-media" accept="image/*">
+                </div>
+                <button type="submit" class="btn">Publier</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="include.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

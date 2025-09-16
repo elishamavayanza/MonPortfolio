@@ -1,19 +1,19 @@
-// Fonction pour initialiser le slider d'arrière-plan - CORRIGÉ
+// Initialisation du slider d'arrière-plan
 function initBackgroundSlider() {
     const slides = document.querySelectorAll('.background-slider .slide');
     if (!slides.length) {
-        console.error("Aucun slide trouvé pour l'arrière-plan");
+        console.error("Aucun slider d'arrière-plan trouvé");
         return;
     }
 
     let currentIndex = 0;
 
-    // Fonction pour changer le slide actif
+    // Fonction pour changer de slide
     function changeSlide() {
         // Retirer 'active' du slide actuel
         slides.forEach(slide => slide.classList.remove('active'));
 
-        // Ajouter 'active' au nouveau slide actuel
+        // Ajouter 'active' au nouveau slide
         slides[currentIndex].classList.add('active');
 
         // Passer au slide suivant
@@ -27,7 +27,7 @@ function initBackgroundSlider() {
     setInterval(changeSlide, 5000);
 }
 
-// Fonction pour initialiser le slider d'images
+// Initialisation du slider d'images
 function initImageSlider() {
     const slides = document.querySelectorAll('.image-slider');
     if (!slides.length) {
@@ -84,6 +84,39 @@ function setupThemeToggle() {
 
 // Fonction pour ajouter une nouvelle publication
 function setupPostForm() {
+    // Gestion de la connexion admin
+    const adminLoginForm = document.getElementById('admin-login-form');
+    const postFormSection = document.getElementById('post-form-section');
+    const adminLoginSection = document.getElementById('admin-login-section');
+
+    // Mot de passe admin (dans un vrai projet, cela devrait être géré côté serveur)
+    const ADMIN_PASSWORD = "admin123"; // Vous pouvez changer ce mot de passe
+
+    if (adminLoginForm) {
+        adminLoginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const passwordInput = document.getElementById('admin-password');
+            const password = passwordInput.value;
+
+            if (password === ADMIN_PASSWORD) {
+                // Afficher le formulaire de publication et cacher le formulaire de connexion
+                adminLoginSection.style.display = 'none';
+                postFormSection.style.display = 'block';
+                // Stocker l'état de connexion dans le localStorage
+                localStorage.setItem('adminLoggedIn', 'true');
+            } else {
+                alert('Mot de passe incorrect!');
+            }
+        });
+    }
+
+    // Vérifier si l'administrateur est déjà connecté
+    if (localStorage.getItem('adminLoggedIn') === 'true') {
+        adminLoginSection.style.display = 'none';
+        postFormSection.style.display = 'block';
+    }
+
     const form = document.getElementById('new-post-form');
     const postsContainer = document.getElementById('posts-container');
 

@@ -39,7 +39,7 @@
         <h2 class="section-title">Mes Publications Quotidiennes</h2>
 
         <!-- Formulaire pour ajouter une nouvelle publication -->
-        <div class="post-form">
+        <div class="post-form" id="post-form-section" style="display: none;">
             <h3>Ajouter une nouvelle publication</h3>
             <form id="new-post-form">
                 <div class="form-group">
@@ -51,6 +51,25 @@
                     <input type="file" id="post-media" accept="image/*">
                 </div>
                 <button type="submit" class="btn">Publier</button>
+            </form>
+        </div>
+
+        <!-- Bouton pour accéder au formulaire de publication -->
+        <div class="post-form">
+            <h3>Accès administrateur</h3>
+            <p>Pour ajouter une nouvelle publication, veuillez vous connecter avec le mot de passe administrateur.</p>
+            <a href="password.html" class="btn">Accéder au formulaire</a>
+        </div>
+
+        <!-- Formulaire de connexion admin (ancienne méthode) -->
+        <div class="post-form" id="admin-login-section" style="display: none;">
+            <h3>Accès administrateur</h3>
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label for="admin-password">Mot de passe :</label>
+                    <input type="password" id="admin-password" placeholder="Entrez le mot de passe administrateur" required>
+                </div>
+                <button type="submit" class="btn">Se connecter</button>
             </form>
         </div>
 
@@ -94,6 +113,7 @@
         </div>
     </div>
 </section>
+
 <!-- Footer sera chargé dynamiquement par include.js -->
 
 <script src="include.js"></script>
