@@ -7,35 +7,76 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body class="light-mode">
-    <!-- Header sera chargé dynamiquement par include.js -->
-    
-    <!-- Hero Section avec arrière-plan dynamique -->
-    <section id="accueil" class="hero">
-        <div class="background-slider">
-            <div class="slide slide-1 active"></div>
-            <div class="slide slide-2"></div>
-            <div class="slide slide-3"></div>
-            <div class="slide slide-4"></div>
+<!-- Header sera chargé dynamiquement par include.js -->
+
+<!-- Hero Section avec arrière-plan dynamique -->
+<section id="accueil" class="hero">
+    <div class="background-slider">
+        <div class="slide slide-1 active"></div>
+        <div class="slide slide-2"></div>
+        <div class="slide slide-3"></div>
+        <div class="slide slide-4"></div>
+    </div>
+    <div class="container hero-content">
+        <div class="hero-text">
+            <h1>Elishama Vayanza<br>Développeur Web, Descktop & Designer</h1>
+            <p>Je crée des expériences web modernes, responsives et attrayantes qui aident les entreprises à se développer en ligne.</p>
+            <a href="contact.html" class="btn">Me contacter</a>
         </div>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1>Elishama Vayanza<br>Développeur Web, Descktop & Designer</h1>
-                <p>Je crée des expériences web modernes, responsives et attrayantes qui aident les entreprises à se développer en ligne.</p>
-                <a href="contact.html" class="btn">Me contacter</a>
+        <div class="hero-image">
+            <div class="image-slider">
+                <img src="image/elishma.jpg" alt="Elishama Vayanza - Développeur Web" class="slider-image active">
+                <img src="image/eli.jpg" alt="Elishama Vayanza - Développeur Web" class="slider-image">
+                <img src="image/shama.jpg" alt="Elishama Vayanza - Développeur Web" class="slider-image">
             </div>
-            <div class="hero-image">
-                <div class="image-slider">
-                    <img src="image/elishma.jpg" alt="Elishama Vayanza - Développeur Web" class="slider-image active">
-                    <img src="image/eli.jpg" alt="Elishama Vayanza - Développeur Web" class="slider-image">
-                    <img src="image/shama.jpg" alt="Elishama Vayanza - Développeur Web" class="slider-image">
+        </div>
+    </div>
+</section>
+
+<!-- Section des publications quotidiennes -->
+<section id="publications" class="daily-posts">
+    <div class="container">
+        <h2 class="section-title">Mes Publications Quotidiennes</h2>
+        <div class="posts-container">
+            <!-- Exemple de publication avec image -->
+            <div class="post-card">
+                <div class="post-date">15 Septembre 2025</div>
+                <div class="post-image">
+                    <img src="image/elishma.jpg" alt="Publication quotidienne">
+                </div>
+                <div class="post-content">
+                    <p>Travail en cours sur un nouveau projet de développement web. Utilisation de technologies modernes pour créer une expérience utilisateur exceptionnelle.</p>
+                </div>
+            </div>
+
+            <!-- Exemple de publication avec vidéo -->
+            <div class="post-card">
+                <div class="post-date">14 Septembre 2025</div>
+                <div class="post-video">
+                    <!-- Placeholder pour vidéo - dans une vraie application, vous auriez une balise vidéo ou un iframe -->
+                    <div class="video-placeholder">
+                        <p>Lecture de vidéo</p>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>Démonstration du nouveau design d'interface utilisateur. Le processus de création et les défis rencontrés lors du développement.</p>
+                </div>
+            </div>
+
+            <!-- Exemple de publication avec texte uniquement -->
+            <div class="post-card text-only">
+                <div class="post-date">13 Septembre 2025</div>
+                <div class="post-content">
+                    <p>Aujourd'hui, j'ai travaillé sur l'optimisation des performances d'un site web. J'ai réussi à réduire le temps de chargement de 40% en optimisant les images et en utilisant le lazy loading.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer sera chargé dynamiquement par include.js -->
+<!-- Footer sera chargé dynamiquement par include.js -->
 
-    <script src="include.js"></script>
-    <script src="script.js"></script>
+<script src="include.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
