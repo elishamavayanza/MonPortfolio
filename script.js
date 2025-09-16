@@ -82,10 +82,95 @@ function setupThemeToggle() {
     }
 }
 
+// Fonction pour ajouter une nouvelle publication
+function setupPostForm() {
+    const form = document.getElementById('new-post-form');
+    const postsContainer = document.getElementById('posts-container');
+
+    if (!form || !postsContainer) {
+        console.warn("Formulaire de publication ou conteneur non trouvé");
+        return;
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const content = document.getElementById('post-content').value;
+        const media = document.getElementById('post-media').files[0];
+
+        if (!content.trim()) {
+            alert("Veuillez entrer du contenu pour votre publication");
+            return;
+        }
+
+        // Créer une nouvelle publication
+        const postCard = document.createElement('div');
+        postCard.className = 'post-card';
+
+        // Obtenir la date actuelle
+        const now = new Date();
+        const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+        const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+
+        // Ajouter la date
+        const postDate = document.createElement('div');
+        postDate.className = 'post-date';
+        postDate.textContent = dateStr;
+        postCard.appendChild(postDate);
+
+        // Ajouter l'image si elle existe
+        if (media) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const postImage = document.createElement('div');
+                postImage.className = 'post-image';
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = "Publication utilisateur";
+                postImage.appendChild(img);
+                postCard.appendChild(postImage);
+
+                // Ajouter le contenu
+                const postContent = document.createElement('div');
+                postContent.className = 'post-content';
+                const contentPara = document.createElement('p');
+                contentPara.textContent = content;
+                postContent.appendChild(contentPara);
+                postCard.appendChild(postContent);
+
+                // Ajouter la publication en haut de la liste
+                postsContainer.insertBefore(postCard, postsContainer.firstChild);
+
+                // Réinitialiser le formulaire
+                form.reset();
+            };
+            reader.readAsDataURL(media);
+        } else {
+            // Publication texte uniquement
+            postCard.classList.add('text-only');
+
+            // Ajouter le contenu
+            const postContent = document.createElement('div');
+            postContent.className = 'post-content';
+            const contentPara = document.createElement('p');
+            contentPara.textContent = content;
+            postContent.appendChild(contentPara);
+            postCard.appendChild(postContent);
+
+            // Ajouter la publication en haut de la liste
+            postsContainer.insertBefore(postCard, postsContainer.firstChild);
+
+            // Réinitialiser le formulaire
+            form.reset();
+        }
+    });
+}
+
 // Initialiser quand la page est chargée
 document.addEventListener('DOMContentLoaded', function() {
     console.log("Page chargée, initialisation du slider...");
     initBackgroundSlider();
     initImageSlider();
     setupThemeToggle();
+    setupPostForm();
 });
