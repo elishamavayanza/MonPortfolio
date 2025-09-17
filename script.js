@@ -168,7 +168,7 @@ function savePostAndRedirect(postElement) {
     window.location.href = 'index.html';
 }
 
-// Fonction pour ajouter une nouvelle publication
+/// Fonction pour ajouter une nouvelle publication
 function setupPostForm() {
     // Gestion de la connexion admin
     const adminLoginForm = document.getElementById('admin-login-form');
@@ -226,8 +226,14 @@ function setupPostForm() {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
+        const title = document.getElementById('post-title').value;
         const content = document.getElementById('post-content').value;
         const media = document.getElementById('post-media').files[0];
+
+        if (!title.trim()) {
+            alert("Veuillez entrer un titre pour votre publication");
+            return;
+        }
 
         if (!content.trim()) {
             alert("Veuillez entrer du contenu pour votre publication");
@@ -248,6 +254,14 @@ function setupPostForm() {
         postDate.className = 'post-date';
         postDate.textContent = dateStr;
         postCard.appendChild(postDate);
+
+        // Ajouter le titre
+        const postHeader = document.createElement('div');
+        postHeader.className = 'post-header';
+        const postTitle = document.createElement('h3');
+        postTitle.textContent = title;
+        postHeader.appendChild(postTitle);
+        postCard.appendChild(postHeader);
 
         // Ajouter l'image si elle existe
         if (media) {
@@ -296,6 +310,7 @@ function setupPostForm() {
         }
     });
 }
+
 
 // Initialiser quand la page est chargée
 document.addEventListener('DOMContentLoaded', function() {
