@@ -87,13 +87,32 @@ function loadPostsFromLocalStorage() {
     const postsContainer = document.getElementById('posts-container');
     if (!postsContainer) return;
 
-    const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+    // Récupérer les publications du localStorage
+    let posts = JSON.parse(localStorage.getItem('posts') || '[]');
+
+    // Filtrer les publications pour ne conserver que celles de moins de 24h
+    const now = new Date().getTime();
+    posts = posts.filter(postObj => {
+        // Vérifier si l'objet post contient une propriété timestamp
+        if (postObj.timestamp) {
+            const postAge = now - postObj.timestamp;
+            // 24 heures en millisecondes
+            return postAge < (24 * 60 * 60 * 1000);
+        }
+        // Si pas de timestamp, conserver l'ancienne logique
+        return true;
+    });
+
+    // Mettre à jour le localStorage avec les publications filtrées
+    localStorage.setItem('posts', JSON.stringify(posts));
 
     // Effacer le contenu existant
     postsContainer.innerHTML = '';
 
     // Ajouter les publications au conteneur
-    posts.forEach(postHTML => {
+    posts.forEach(postObj => {
+        // Si c'est un objet avec timestamp, extraire le HTML
+        const postHTML = postObj.html !== undefined ? postObj.html : postObj;
         postsContainer.insertAdjacentHTML('beforeend', postHTML);
     });
 }
@@ -103,11 +122,14 @@ function savePostAndRedirect(postElement) {
     // Récupérer les publications existantes du localStorage
     let posts = JSON.parse(localStorage.getItem('posts') || '[]');
 
-    // Convertir l'élément en HTML
-    const postHTML = postElement.outerHTML;
+    // Créer un objet contenant le HTML et le timestamp
+    const postObj = {
+        html: postElement.outerHTML,
+        timestamp: new Date().getTime()
+    };
 
     // Ajouter la nouvelle publication au début du tableau
-    posts.unshift(postHTML);
+    posts.unshift(postObj);
 
     // Limiter le nombre de publications pour éviter de dépasser la quota de localStorage
     if (posts.length > 5) {
