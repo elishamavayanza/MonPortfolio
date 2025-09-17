@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr" class="light-mode">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détail de la publication - Mon Portfolio</title>
+    <link rel="stylesheet" href="post-detail.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Header -->
+<div id="header-placeholder"></div>
+
+<!-- Section détail de la publication -->
+<section class="post-detail">
+    <div class="post-detail-container">
+        <div class="post-detail-header">
+            <h1 id="post-detail-title">Titre de la publication</h1>
+        </div>
+
+        <div class="post-detail-content">
+            <div class="post-detail-image" id="post-detail-image">
+                <!-- Image de la publication -->
+            </div>
+
+            <div class="post-detail-text" id="post-detail-text">
+                <!-- Texte de la publication -->
+            </div>
+        </div>
+
+        <div class="post-detail-date" id="post-detail-date">Date de la publication</div>
+        <a href="index.html" class="back-to-home">Retour à l'accueil</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<div id="footer-placeholder"></div>
+
+<!-- Script -->
+<script src="include.js"></script>
+<script src="script.js"></script>
+<script>
+    // Script pour afficher les détails de la publication
+    document.addEventListener('DOMContentLoaded', function() {
+        // Récupérer les données de la publication depuis localStorage
+        const postData = localStorage.getItem('currentPost');
+
+        if (postData) {
+            const post = JSON.parse(postData);
+
+            // Mettre à jour le titre
+            document.getElementById('post-detail-title').textContent = post.title;
+
+            // Mettre à jour la date
+            document.getElementById('post-detail-date').textContent = post.date;
+
+            // Mettre à jour l'image si elle existe
+            const imageContainer = document.getElementById('post-detail-image');
+            if (post.image) {
+                const img = document.createElement('img');
+                img.src = post.image;
+                img.alt = post.title;
+                imageContainer.appendChild(img);
+            } else {
+                imageContainer.innerHTML = '<div class="no-image">Pas d\'image disponible</div>';
+            }
+
+            // Mettre à jour le texte
+            const textContainer = document.getElementById('post-detail-text');
+            const paragraphs = post.content.split('\n');
+            textContainer.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+        } else {
+            // Rediriger vers la page d'accueil si aucune donnée n'est trouvée
+            window.location.href = 'index.html';
+        }
+    });
+</script>
+</body>
+</html>

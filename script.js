@@ -204,6 +204,40 @@ function applyReadMoreFunctionality() {
             content.appendChild(readMoreDiv);
         }
     });
+
+    // Ajouter la fonctionnalité pour voir le détail complet de la publication
+    const postCards = document.querySelectorAll('.post-card');
+    postCards.forEach((card, index) => {
+        // Rendre la carte cliquable
+        card.style.cursor = 'pointer';
+
+        card.addEventListener('click', function(e) {
+            // Ne pas déclencher si on clique sur le bouton "voir plus"
+            if (e.target.classList.contains('read-more-btn')) {
+                return;
+            }
+
+            // Extraire les données de la publication
+            const titleElement = card.querySelector('.post-header h3');
+            const dateElement = card.querySelector('.post-date');
+            const imageElement = card.querySelector('.post-image img');
+            const contentElement = card.querySelector('.post-content p');
+
+            // Créer un objet avec les données de la publication
+            const postData = {
+                title: titleElement ? titleElement.textContent : '',
+                date: dateElement ? dateElement.textContent : '',
+                image: imageElement ? imageElement.src : null,
+                content: contentElement ? contentElement.textContent : ''
+            };
+
+            // Stocker les données dans localStorage
+            localStorage.setItem('currentPost', JSON.stringify(postData));
+
+            // Rediriger vers la page de détail
+            window.location.href = 'post-detail.html';
+        });
+    });
 }
 
 /// Fonction pour ajouter une nouvelle publication
