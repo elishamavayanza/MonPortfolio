@@ -82,6 +82,41 @@ function setupThemeToggle() {
     }
 }
 
+// Fonction pour charger les publications depuis le localStorage
+function loadPostsFromLocalStorage() {
+    const postsContainer = document.getElementById('posts-container');
+    if (!postsContainer) return;
+
+    const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+
+    // Ajouter les publications au conteneur
+    posts.forEach(postHTML => {
+        postsContainer.insertAdjacentHTML('afterbegin', postHTML);
+    });
+}
+
+// Fonction pour sauvegarder la publication et rediriger
+function savePostAndRedirect(postHTML) {
+    // Récupérer les publications existantes du localStorage
+    let posts = JSON.parse(localStorage.getItem('posts') || '[]');
+
+    // Ajouter la nouvelle publication au début du tableau
+    posts.unshift(postHTML);
+
+    // Sauvegarder dans le localStorage
+    localStorage.setItem('posts', JSON.stringify(posts));
+
+    // Réinitialiser le formulaire
+    const form = document.getElementById('new-post-form');
+    if (form) {
+        form.reset();
+    }
+
+    // Rediriger vers la page d'accueil
+    window.location.href = 'index.html';
+}
+
+
 // Fonction pour ajouter une nouvelle publication
 function setupPostForm() {
     // Gestion de la connexion admin
@@ -113,19 +148,24 @@ function setupPostForm() {
 
     // Vérifier si l'administrateur est déjà connecté
     if (localStorage.getItem('adminLoggedIn') === 'true') {
-        adminLoginSection.style.display = 'none';
-        postFormSection.style.display = 'block';
+        if (adminLoginSection) adminLoginSection.style.display = 'none';
+        if (postFormSection) postFormSection.style.display = 'block';
     }
 
     const form = document.getElementById('new-post-form');
-    const postsContainer = document.getElementById('posts-container');
 
-    if (!form || !postsContainer) {
-        console.warn("Formulaire de publication ou conteneur non trouvé");
+    // Ne pas vérifier postsContainer sur la page de publication
+    if (!form) {
+        console.warn("Formulaire de publication non trouvé");
         return;
     }
 
-    form.addEventListener('submit', function(e) {
+    // Supprimer les écouteurs d'événements existants s'il y en a
+    const newForm = form.cloneNode(true);
+    form.parentNode.replaceChild(newForm, form);
+
+    // Ajouter l'écouteur d'événements pour le formulaire de publication
+    newForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
         const content = document.getElementById('post-content').value;
@@ -171,11 +211,8 @@ function setupPostForm() {
                 postContent.appendChild(contentPara);
                 postCard.appendChild(postContent);
 
-                // Ajouter la publication en haut de la liste
-                postsContainer.insertBefore(postCard, postsContainer.firstChild);
-
-                // Réinitialiser le formulaire
-                form.reset();
+                // Sauvegarder la publication dans localStorage et rediriger vers la page d'accueil
+                savePostAndRedirect(postCard.outerHTML);
             };
             reader.readAsDataURL(media);
         } else {
@@ -190,14 +227,12 @@ function setupPostForm() {
             postContent.appendChild(contentPara);
             postCard.appendChild(postContent);
 
-            // Ajouter la publication en haut de la liste
-            postsContainer.insertBefore(postCard, postsContainer.firstChild);
-
-            // Réinitialiser le formulaire
-            form.reset();
+            // Sauvegarder la publication dans localStorage et rediriger vers la page d'accueil
+            savePostAndRedirect(postCard.outerHTML);
         }
     });
 }
+
 
 // Initialiser quand la page est chargée
 document.addEventListener('DOMContentLoaded', function() {
@@ -206,4 +241,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initImageSlider();
     setupThemeToggle();
     setupPostForm();
+
+    // Charger les publications sur la page d'accueil
+    // Vérifier si nous sommes sur la page d'accueil en vérifiant l'existence de la section accueil
+    if (document.getElementById('accueil')) {
+        loadPostsFromLocalStorage();
+    }
 });

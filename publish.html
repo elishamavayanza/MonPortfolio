@@ -12,7 +12,20 @@
 <!-- Section de publication -->
 <section class="publish-section">
     <div class="container">
-        <div class="post-form" id="post-form-section">
+        <div id="admin-login-section" class="password-form-container">
+            <h3>Accès administrateur requis</h3>
+            <p>Veuillez entrer le mot de passe pour accéder au formulaire de publication</p>
+
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label for="admin-password">Mot de passe administrateur :</label>
+                    <input type="password" id="admin-password" required>
+                </div>
+                <button type="submit" class="btn">Se connecter</button>
+            </form>
+        </div>
+
+        <div class="post-form" id="post-form-section" style="display: none;">
             <h3>Ajouter une nouvelle publication</h3>
             <form id="new-post-form">
                 <div class="form-group">
@@ -31,5 +44,14 @@
 
 <script src="include.js"></script>
 <script src="script.js"></script>
+<script>
+    // Initialiser le formulaire de publication quand la page est chargée
+    document.addEventListener('DOMContentLoaded', function() {
+        // Vérifier si nous sommes sur la page de publication avant d'appeler setupPostForm
+        if (document.getElementById('new-post-form')) {
+            setupPostForm();
+        }
+    });
+</script>
 </body>
 </html>
