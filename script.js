@@ -89,22 +89,52 @@ function loadPostsFromLocalStorage() {
 
     const posts = JSON.parse(localStorage.getItem('posts') || '[]');
 
+    // Effacer le contenu existant
+    postsContainer.innerHTML = '';
+
     // Ajouter les publications au conteneur
     posts.forEach(postHTML => {
-        postsContainer.insertAdjacentHTML('afterbegin', postHTML);
+        postsContainer.insertAdjacentHTML('beforeend', postHTML);
     });
 }
 
 // Fonction pour sauvegarder la publication et rediriger
-function savePostAndRedirect(postHTML) {
+function savePostAndRedirect(postElement) {
     // Récupérer les publications existantes du localStorage
     let posts = JSON.parse(localStorage.getItem('posts') || '[]');
+
+    // Convertir l'élément en HTML
+    const postHTML = postElement.outerHTML;
 
     // Ajouter la nouvelle publication au début du tableau
     posts.unshift(postHTML);
 
-    // Sauvegarder dans le localStorage
-    localStorage.setItem('posts', JSON.stringify(posts));
+    // Limiter le nombre de publications pour éviter de dépasser la quota de localStorage
+    if (posts.length > 5) {
+        posts = posts.slice(0, 5);
+    }
+
+    // Essayer de sauvegarder dans le localStorage
+    try {
+        localStorage.setItem('posts', JSON.stringify(posts));
+    } catch (e) {
+        if (e instanceof DOMException && e.name === 'QuotaExceededError') {
+            // Si nous dépassons la quota, réduire davantage le nombre de publications
+            console.warn("Quota de stockage dépassé. Réduction supplémentaire des publications.");
+            posts = posts.slice(0, 3);
+            try {
+                localStorage.setItem('posts', JSON.stringify(posts));
+            } catch (e2) {
+                // Si cela échoue encore, ne conserver qu'une seule publication
+                console.warn("Quota de stockage toujours dépassé. Conservation d'une seule publication.");
+                posts = posts.slice(0, 1);
+                localStorage.setItem('posts', JSON.stringify(posts));
+            }
+        } else {
+            // Autre erreur
+            throw e;
+        }
+    }
 
     // Réinitialiser le formulaire
     const form = document.getElementById('new-post-form');
@@ -116,7 +146,6 @@ function savePostAndRedirect(postHTML) {
     window.location.href = 'index.html';
 }
 
-
 // Fonction pour ajouter une nouvelle publication
 function setupPostForm() {
     // Gestion de la connexion admin
@@ -127,7 +156,7 @@ function setupPostForm() {
     // Mot de passe admin (dans un vrai projet, cela devrait être géré côté serveur)
     const ADMIN_PASSWORD = "admin123"; // Vous pouvez changer ce mot de passe
 
-    if (adminLoginForm) {
+    if (adminLoginForm && !adminLoginForm.dataset.initialized) {
         adminLoginForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -144,6 +173,9 @@ function setupPostForm() {
                 alert('Mot de passe incorrect!');
             }
         });
+
+        // Marquer le formulaire comme initialisé
+        adminLoginForm.dataset.initialized = 'true';
     }
 
     // Vérifier si l'administrateur est déjà connecté
@@ -160,12 +192,16 @@ function setupPostForm() {
         return;
     }
 
-    // Supprimer les écouteurs d'événements existants s'il y en a
-    const newForm = form.cloneNode(true);
-    form.parentNode.replaceChild(newForm, form);
+    // Vérifier si un écouteur d'événements est déjà attaché
+    if (form.dataset.initialized) {
+        return;
+    }
+
+    // Marquer que l'écouteur d'événements est attaché
+    form.dataset.initialized = 'true';
 
     // Ajouter l'écouteur d'événements pour le formulaire de publication
-    newForm.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
 
         const content = document.getElementById('post-content').value;
@@ -193,6 +229,12 @@ function setupPostForm() {
 
         // Ajouter l'image si elle existe
         if (media) {
+            // Vérifier la taille du fichier (limite à 500KB)
+            if (media.size > 512 * 1024) {
+                alert("L'image est trop volumineuse. Veuillez sélectionner une image de moins de 500KB.");
+                return;
+            }
+
             const reader = new FileReader();
             reader.onload = function(e) {
                 const postImage = document.createElement('div');
@@ -212,7 +254,7 @@ function setupPostForm() {
                 postCard.appendChild(postContent);
 
                 // Sauvegarder la publication dans localStorage et rediriger vers la page d'accueil
-                savePostAndRedirect(postCard.outerHTML);
+                savePostAndRedirect(postCard);
             };
             reader.readAsDataURL(media);
         } else {
@@ -228,11 +270,10 @@ function setupPostForm() {
             postCard.appendChild(postContent);
 
             // Sauvegarder la publication dans localStorage et rediriger vers la page d'accueil
-            savePostAndRedirect(postCard.outerHTML);
+            savePostAndRedirect(postCard);
         }
     });
 }
-
 
 // Initialiser quand la page est chargée
 document.addEventListener('DOMContentLoaded', function() {
@@ -240,11 +281,17 @@ document.addEventListener('DOMContentLoaded', function() {
     initBackgroundSlider();
     initImageSlider();
     setupThemeToggle();
-    setupPostForm();
 
     // Charger les publications sur la page d'accueil
     // Vérifier si nous sommes sur la page d'accueil en vérifiant l'existence de la section accueil
     if (document.getElementById('accueil')) {
         loadPostsFromLocalStorage();
+    }
+
+    // Initialiser le formulaire de publication sur la page publish.html
+    // Vérifier si nous sommes sur la page de publication
+    if (document.getElementById('new-post-form')) {
+        // Attendre que le header soit chargé via include.js
+        setTimeout(setupPostForm, 100);
     }
 });

@@ -47,10 +47,10 @@
 <script>
     // Initialiser le formulaire de publication quand la page est chargée
     document.addEventListener('DOMContentLoaded', function() {
-        // Vérifier si nous sommes sur la page de publication avant d'appeler setupPostForm
-        if (document.getElementById('new-post-form')) {
+        // Attendre que le header soit chargé via include.js
+        setTimeout(function() {
             setupPostForm();
-        }
+        }, 100);
     });
 </script>
 </body>
