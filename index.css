@@ -713,11 +713,15 @@ footer {
 }
 
 .post-date {
-    padding: 15px 20px;
+    padding: 8px 12px;
     background-color: var(--primary-color);
     color: white;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-top: 0;
+    align-self: flex-start;
 }
 
 .post-image img,
@@ -898,6 +902,7 @@ footer {
         max-width: 250px;
         max-height: 250px;
         position: relative;
+        opacity: 1;
         opacity: 1;
         border-radius: 50%;
         display: block;
