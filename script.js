@@ -115,6 +115,9 @@ function loadPostsFromLocalStorage() {
         const postHTML = postObj.html !== undefined ? postObj.html : postObj;
         postsContainer.insertAdjacentHTML('beforeend', postHTML);
     });
+
+    // Appliquer la fonctionnalité "voir plus" aux cartes chargées
+    applyReadMoreFunctionality();
 }
 
 // Fonction pour sauvegarder la publication et rediriger
@@ -166,6 +169,41 @@ function savePostAndRedirect(postElement) {
 
     // Rediriger vers la page d'accueil
     window.location.href = 'index.html';
+}
+
+// Fonction pour gérer le bouton "voir plus" sur les cartes de publication
+function applyReadMoreFunctionality() {
+    // Sélectionner tous les contenus de publication
+    const postContents = document.querySelectorAll('.post-content');
+
+    postContents.forEach(content => {
+        // Vérifier si le contenu est trop long
+        if (content.scrollHeight > content.clientHeight + 10) {
+            // Ajouter la classe collapsed pour masquer le contenu débordant
+            content.classList.add('collapsed');
+
+            // Créer le bouton "voir plus"
+            const readMoreDiv = document.createElement('div');
+            readMoreDiv.className = 'read-more';
+
+            const readMoreBtn = document.createElement('button');
+            readMoreBtn.className = 'read-more-btn';
+            readMoreBtn.textContent = 'Voir plus';
+
+            readMoreBtn.addEventListener('click', function() {
+                if (content.classList.contains('collapsed')) {
+                    content.classList.remove('collapsed');
+                    readMoreBtn.textContent = 'Voir moins';
+                } else {
+                    content.classList.add('collapsed');
+                    readMoreBtn.textContent = 'Voir plus';
+                }
+            });
+
+            readMoreDiv.appendChild(readMoreBtn);
+            content.appendChild(readMoreDiv);
+        }
+    });
 }
 
 /// Fonction pour ajouter une nouvelle publication

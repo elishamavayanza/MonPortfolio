@@ -699,6 +699,7 @@ footer {
     -moz-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    height: 400px; /* Hauteur fixe */
 }
 
 .post-card:hover {
@@ -741,7 +742,7 @@ footer {
 .post-image img,
 .video-placeholder {
     width: 100%;
-    height: 200px;
+    height: 150px;
     object-fit: cover;
 }
 
@@ -773,16 +774,49 @@ footer {
     -moz-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
+    overflow: hidden;
+    position: relative;
 }
 
 .post-content p {
     line-height: 1.6;
     color: var(--text-color);
+    margin: 0;
+}
+
+.post-content.collapsed {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.post-content .read-more {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(transparent, var(--post-card-bg));
+    padding: 30px 0 10px;
+}
+
+.post-content.collapsed .read-more {
+    display: block;
+}
+
+.read-more-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9rem;
 }
 
 .post-card.text-only .post-content {
     background-color: var(--post-card-bg);
-    height: 200px;
+    height: 150px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -1034,6 +1068,8 @@ footer {
 
     .post-card {
         margin-bottom: 20px;
+        height: auto; /* Sur petits écrans, permettre aux cartes de s'ajuster */
+        max-height: none;
     }
 }
 
