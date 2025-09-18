@@ -135,8 +135,8 @@ function savePostAndRedirect(postElement) {
     posts.unshift(postObj);
 
     // Limiter le nombre de publications pour éviter de dépasser la quota de localStorage
-    if (posts.length > 5) {
-        posts = posts.slice(0, 5);
+    if (posts.length > 8) {
+        posts = posts.slice(0, 8);
     }
 
     // Essayer de sauvegarder dans le localStorage
@@ -146,7 +146,7 @@ function savePostAndRedirect(postElement) {
         if (e instanceof DOMException && e.name === 'QuotaExceededError') {
             // Si nous dépassons la quota, réduire davantage le nombre de publications
             console.warn("Quota de stockage dépassé. Réduction supplémentaire des publications.");
-            posts = posts.slice(0, 3);
+            posts = posts.slice(0, 5);
             try {
                 localStorage.setItem('posts', JSON.stringify(posts));
             } catch (e2) {
@@ -209,14 +209,14 @@ function applyReadMoreFunctionality() {
             const titleElement = card.querySelector('.post-header h3');
             const dateElement = card.querySelector('.post-date');
             const imageElement = card.querySelector('.post-image img');
-            const contentElement = card.querySelector('.post-content p');
+            const contentElement = card.querySelector('.post-content');
 
             // Créer un objet avec les données de la publication
             const postData = {
                 title: titleElement ? titleElement.textContent : '',
                 date: dateElement ? dateElement.textContent : '',
                 image: imageElement ? imageElement.src : null,
-                content: contentElement ? contentElement.textContent : ''
+                content: contentElement ? contentElement.innerHTML : '' // Utiliser innerHTML pour conserver le formatage Markdown
             };
 
             // Stocker les données dans localStorage
@@ -225,6 +225,75 @@ function applyReadMoreFunctionality() {
             // Rediriger vers la page de détail
             window.location.href = 'post-detail.html';
         });
+    });
+}
+
+/// Fonction pour compresser une image afin de réduire sa taille
+function compressImage(file, maxSizeKB = 500, quality = 0.8) {
+    return new Promise((resolve, reject) => {
+        // Vérifier si le fichier est une image
+        if (!file.type.match('image.*')) {
+            reject(new Error('Le fichier n\'est pas une image'));
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                // Créer un canvas pour redimensionner l'image
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                // Calculer les nouvelles dimensions tout en conservant les proportions
+                const maxWidth = 1200;
+                const maxHeight = 800;
+                let { width, height } = img;
+
+                if (width > height) {
+                    if (width > maxWidth) {
+                        height *= maxWidth / width;
+                        width = maxWidth;
+                    }
+                } else {
+                    if (height > maxHeight) {
+                        width *= maxHeight / height;
+                        height = maxHeight;
+                    }
+                }
+
+                // Définir les dimensions du canvas
+                canvas.width = width;
+                canvas.height = height;
+
+                // Dessiner l'image redimensionnée sur le canvas
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Essayer différentes qualités pour atteindre la taille souhaitée
+                let currentQuality = quality;
+                let dataUrl = canvas.toDataURL('image/jpeg', currentQuality);
+
+                // Réduire la qualité jusqu'à atteindre la taille maximale souhaitée
+                while (dataUrl.length > maxSizeKB * 1024 && currentQuality > 0.1) {
+                    currentQuality -= 0.1;
+                    dataUrl = canvas.toDataURL('image/jpeg', currentQuality);
+                }
+
+                resolve(dataUrl);
+            };
+
+            img.onerror = function() {
+                reject(new Error('Erreur lors du chargement de l\'image'));
+            };
+
+            img.src = event.target.result;
+        };
+
+        reader.onerror = function() {
+            reject(new Error('Erreur lors de la lecture du fichier'));
+        };
+
+        reader.readAsDataURL(file);
     });
 }
 
@@ -307,7 +376,8 @@ function setupPostForm() {
         // Obtenir la date actuelle
         const now = new Date();
         const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-        const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+        const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear() + ' à ' +
+            String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
 
         // Ajouter la date
         const postDate = document.createElement('div');
@@ -325,44 +395,44 @@ function setupPostForm() {
 
         // Ajouter l'image si elle existe
         if (media) {
-            // Vérifier la taille du fichier (limite à 500KB)
-            if (media.size > 512 * 1024) {
-                alert("L'image est trop volumineuse. Veuillez sélectionner une image de moins de 500KB.");
+            // Vérifier la taille du fichier (limite à 1,5MB)
+            if (media.size > 1.5 * 1024 * 1024) {
+                alert("L'image est trop volumineuse. Veuillez sélectionner une image de moins de 1,5MB.");
                 return;
             }
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const postImage = document.createElement('div');
-                postImage.className = 'post-image';
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = "Publication utilisateur";
-                postImage.appendChild(img);
-                postCard.appendChild(postImage);
+            // Compresser l'image avant de la sauvegarder
+            compressImage(media)
+                .then(compressedImageData => {
+                    const postImage = document.createElement('div');
+                    postImage.className = 'post-image';
+                    const img = document.createElement('img');
+                    img.src = compressedImageData;
+                    img.alt = "Publication utilisateur";
+                    postImage.appendChild(img);
+                    postCard.appendChild(postImage);
 
-                // Ajouter le contenu
-                const postContent = document.createElement('div');
-                postContent.className = 'post-content';
-                const contentPara = document.createElement('p');
-                contentPara.textContent = content;
-                postContent.appendChild(contentPara);
-                postCard.appendChild(postContent);
+                    // Ajouter le contenu avec Markdown
+                    const postContent = document.createElement('div');
+                    postContent.className = 'post-content';
+                    postContent.innerHTML = marked.parse(content);
+                    postCard.appendChild(postContent);
 
-                // Sauvegarder la publication dans localStorage et rediriger vers la page d'accueil
-                savePostAndRedirect(postCard);
-            };
-            reader.readAsDataURL(media);
+                    // Sauvegarder la publication dans localStorage et rediriger vers la page d'accueil
+                    savePostAndRedirect(postCard);
+                })
+                .catch(error => {
+                    console.error("Erreur lors de la compression de l'image:", error);
+                    alert("Erreur lors du traitement de l'image. Veuillez réessayer.");
+                });
         } else {
             // Publication texte uniquement
             postCard.classList.add('text-only');
 
-            // Ajouter le contenu
+            // Ajouter le contenu avec prise en charge du Markdown
             const postContent = document.createElement('div');
             postContent.className = 'post-content';
-            const contentPara = document.createElement('p');
-            contentPara.textContent = content;
-            postContent.appendChild(contentPara);
+            postContent.innerHTML = marked.parse(content);
             postCard.appendChild(postContent);
 
             // Sauvegarder la publication dans localStorage et rediriger vers la page d'accueil
@@ -370,7 +440,6 @@ function setupPostForm() {
         }
     });
 }
-
 
 // Initialiser quand la page est chargée
 document.addEventListener('DOMContentLoaded', function() {
@@ -390,5 +459,41 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('new-post-form')) {
         // Attendre que le header soit chargé via include.js
         setTimeout(setupPostForm, 100);
+    }
+
+    // Gestion de l'affichage des images sur la page de détail
+    // Vérifier que nous ne sommes pas sur la page post-detail.html pour éviter les doublons
+    if (document.getElementById('post-detail-image') && !window.location.pathname.includes('post-detail.html')) {
+        const imageContainer = document.getElementById('post-detail-image');
+        // Récupérer les données de la publication depuis localStorage
+        const postData = JSON.parse(localStorage.getItem('currentPost') || '{}');
+
+        if (postData.image) {
+            const img = document.createElement('img');
+            img.src = postData.image;
+            img.alt = postData.title;
+
+            // Ajout d'une gestion d'erreur pour les images lourdes
+            img.onload = function() {
+                // Vérifier les dimensions de l'image et ajouter une classe si elle est trop grande
+                if (img.naturalWidth > 2000 || img.naturalHeight > 1500) {
+                    img.classList.add('large-image');
+                    // Ajouter un avertissement
+                    const warning = document.createElement('div');
+                    warning.className = 'image-warning';
+                    warning.textContent = 'Cette image est très grande et peut affecter les performances.';
+                    imageContainer.appendChild(warning);
+                }
+            };
+
+            // Gestion des erreurs de chargement
+            img.onerror = function() {
+                imageContainer.innerHTML = '<div class="image-error">Erreur de chargement de l\'image</div>';
+            };
+
+            imageContainer.appendChild(img);
+        } else {
+            imageContainer.innerHTML = '<div class="no-image">Aucune image pour cette publication</div>';
+        }
     }
 });

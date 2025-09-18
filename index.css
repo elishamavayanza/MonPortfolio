@@ -826,25 +826,6 @@ footer {
     color: var(--text-color);
     margin: 0;
 }
-/*.post-content.collapsed {*/
-/*    max-height: 100px;*/
-/*    overflow: hidden;*/
-/*}*/
-
-/*.post-content .read-more {*/
-/*    display: none;*/
-/*    position: absolute;*/
-/*    bottom: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    text-align: center;*/
-/*    background: linear-gradient(transparent, var(--post-card-bg));*/
-/*    padding: 30px 0 10px;*/
-/*}*/
-
-/*.post-content.collapsed .read-more {*/
-/*    display: block;*/
-/*}*/
 
 .read-more-btn {
     background: var(--primary-color);
