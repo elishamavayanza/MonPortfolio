@@ -818,7 +818,7 @@ footer {
     position: relative;
 // Deleted: overflow: hidden;
     overflow-y: auto;
-    max-height: 150px;
+    max-height: 280px;
 }
 
 .post-content p {

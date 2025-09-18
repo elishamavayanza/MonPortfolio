@@ -187,18 +187,6 @@ function applyReadMoreFunctionality() {
             readMoreDiv.className = 'read-more';
 
             const readMoreBtn = document.createElement('button');
-            readMoreBtn.className = 'read-more-btn';
-            readMoreBtn.textContent = 'Voir plus';
-
-            readMoreBtn.addEventListener('click', function() {
-                if (content.classList.contains('collapsed')) {
-                    content.classList.remove('collapsed');
-                    readMoreBtn.textContent = 'Voir moins';
-                } else {
-                    content.classList.add('collapsed');
-                    readMoreBtn.textContent = 'Voir plus';
-                }
-            });
 
             readMoreDiv.appendChild(readMoreBtn);
             content.appendChild(readMoreDiv);
