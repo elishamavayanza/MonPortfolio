@@ -610,11 +610,33 @@ footer {
 .daily-posts {
     background-color: var(--bg-color);
     padding: 60px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.daily-posts::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('image/news.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.daily-posts .container {
+    position: relative;
+    z-index: 2;
 }
 
 .daily-posts .section-title {
     margin-bottom: 40px;
 }
+
 
 .post-form {
     background-color: var(--post-card-bg);
@@ -622,6 +644,7 @@ footer {
     padding: 20px;
     margin-bottom: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0.7; /* Réduction de l'opacité des cartes */
 }
 
 .post-form h3 {
@@ -700,6 +723,7 @@ footer {
     -ms-flex-direction: column;
     flex-direction: column;
     height: 400px; /* Hauteur fixe */
+    opacity: 0.8; /* Ajout de l'opacité pour les cartes */
 }
 
 .post-card:hover {
