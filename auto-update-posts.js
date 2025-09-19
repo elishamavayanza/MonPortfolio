@@ -17,7 +17,8 @@ function fetchLatestNews() {
                         title: item.title,
                         content: item.description,
                         date: new Date(item.pubDate),
-                        image: item.enclosure ? item.enclosure.link : null // Récupération de l'image
+                        image: item.enclosure ? item.enclosure.link : null, // Récupération de l'image
+                        link: item.link // Ajout du lien vers l'article original
                     };
                 });
             } else {
@@ -41,19 +42,22 @@ function getSimulatedNews() {
             title: "Nouvelles technologies en développement web",
             content: "Les dernières tendances en développement web montrent une adoption croissante de WebAssembly et des frameworks basés sur les composants. Les développeurs recherchent de plus en plus des solutions performantes et modulables pour leurs applications web modernes.",
             date: new Date(),
-            image: "https://picsum.photos/600/400?random=1" // Image simulée
+            image: "https://picsum.photos/600/400?random=1", // Image simulée
+            link: "#" // Lien simulé
         },
         {
             title: "L'IA dans le développement logiciel",
             content: "L'intelligence artificielle commence à transformer la façon dont nous écrivons, testons et déployons nos applications. Des outils comme GitHub Copilot et d'autres assistants IA permettent d'accélérer le développement tout en maintenant une qualité de code élevée.",
             date: new Date(Date.now() - 3600000), // Il y a 1 heure
-            image: "https://picsum.photos/600/400?random=2" // Image simulée
+            image: "https://picsum.photos/600/400?random=2", // Image simulée
+            link: "#" // Lien simulé
         },
         {
             title: "Sécurité des applications web",
             content: "De nouvelles vulnérabilités ont été découvertes dans des bibliothèques JavaScript populaires. Mise à jour recommandée de vos dépendances. Les experts en cybersécurité recommandent de vérifier régulièrement les vulnérabilités dans les dépendances de vos projets pour éviter les failles de sécurité.",
             date: new Date(Date.now() - 7200000), // Il y a 2 heures
-            image: "https://picsum.photos/600/400?random=3" // Image simulée
+            image: "https://picsum.photos/600/400?random=3", // Image simulée
+            link: "#" // Lien simulé
         }
     ];
 }
@@ -64,6 +68,15 @@ function getSimulatedNews() {
 function createPostFromNews(newsItem) {
     const postCard = document.createElement('div');
     postCard.className = 'post-card auto-news';
+
+    // Créer un lien cliquable pour l'ensemble de la carte
+    const linkWrapper = document.createElement('div');
+    linkWrapper.className = 'post-link-wrapper';
+    linkWrapper.style.textDecoration = 'none';
+    linkWrapper.style.color = 'inherit';
+    linkWrapper.style.display = 'flex';
+    linkWrapper.style.flexDirection = 'column';
+    linkWrapper.style.height = '100%';
 
     // Formater la date
     const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
@@ -76,7 +89,7 @@ function createPostFromNews(newsItem) {
     const postDate = document.createElement('div');
     postDate.className = 'post-date';
     postDate.textContent = dateStr;
-    postCard.appendChild(postDate);
+    linkWrapper.appendChild(postDate);
 
     // Ajouter le titre
     const postHeader = document.createElement('div');
@@ -84,7 +97,7 @@ function createPostFromNews(newsItem) {
     const postTitle = document.createElement('h3');
     postTitle.textContent = newsItem.title.charAt(0).toUpperCase() + newsItem.title.slice(1); // Majuscule au début
     postHeader.appendChild(postTitle);
-    postCard.appendChild(postHeader);
+    linkWrapper.appendChild(postHeader);
 
     // Ajouter l'image si elle existe
     if (newsItem.image) {
@@ -93,21 +106,37 @@ function createPostFromNews(newsItem) {
         const img = document.createElement('img');
         img.src = newsItem.image;
         img.alt = newsItem.title;
+        img.style.width = '100%';
+        img.style.height = '150px';
+        img.style.objectFit = 'cover';
         postImage.appendChild(img);
-        postCard.appendChild(postImage);
+        linkWrapper.appendChild(postImage);
     }
 
     // Ajouter le contenu
     const postContent = document.createElement('div');
     postContent.className = 'post-content';
     postContent.innerHTML = marked.parse(newsItem.content);
-    postCard.appendChild(postContent);
+    linkWrapper.appendChild(postContent);
 
     // Ajouter une étiquette pour indiquer que c'est une actualité automatique
     const autoLabel = document.createElement('div');
     autoLabel.className = 'auto-news-label';
-    autoLabel.textContent = '';
-    postCard.appendChild(autoLabel);
+    autoLabel.textContent = 'Actualité';
+    linkWrapper.appendChild(autoLabel);
+
+    // Ajouter le lien cliquable autour de toute la carte
+    const fullLink = document.createElement('a');
+    fullLink.href = newsItem.link;
+    fullLink.target = '_blank';
+    fullLink.style.textDecoration = 'none';
+    fullLink.style.color = 'inherit';
+    fullLink.style.display = 'block';
+    fullLink.style.height = '100%';
+
+    // Ajouter le lien wrapper à la carte
+    fullLink.appendChild(linkWrapper);
+    postCard.appendChild(fullLink);
 
     return postCard;
 }

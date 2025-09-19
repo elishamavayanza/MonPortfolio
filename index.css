@@ -875,6 +875,32 @@ footer {
     font-size: 0.8em;
     font-weight: bold;
 }
+/* Style pour les liens dans les cartes d'actualités automatiques */
+.post-link-wrapper {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.post-link-wrapper:hover {
+    text-decoration: none;
+}
+
+/* Style pour les cartes d'actualités automatiques */
+.post-card.auto-news {
+    cursor: pointer;
+    position: relative;
+}
+
+.post-card.auto-news:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+
+
+
 
 /* Animation pour attirer l'attention sur les nouvelles publications */
 @keyframes highlight {
@@ -1088,6 +1114,8 @@ footer {
     .post-card {
         max-width: 100%;
     }
+
+
 }
 
 /* Media Query pour les petits écrans */
