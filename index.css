@@ -501,6 +501,8 @@ nav {
     -o-background-size: cover;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     opacity: 0;
     -webkit-transition: opacity 1s ease-in-out;
     -moz-transition: opacity 1s ease-in-out;
@@ -523,11 +525,13 @@ nav {
 
 .slide-4 {
     background-image: url('image/image4.png');
+
 }
 
 .background-slider .slide.active {
     opacity: 0.3; /* Ajustez l'opacité selon vos préférences */
 }
+
 
 /* Footer */
 footer {
@@ -624,6 +628,8 @@ footer {
     background-image: url('image/news.png');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     opacity: 0.3;
     z-index: 1;
 }
