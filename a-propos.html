@@ -4,68 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Portfolio | À propos</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="a-propos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
 </head>
 <body class="light-mode">
-    <!-- Header et Footer seront chargés dynamiquement par include.js -->
-    
-    <!-- About Section -->
-    <section id="a-propos" class="about">
-        <div class="container">
-            <h2 class="section-title">À propos de moi</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Qui suis-je?</h3>
-                    <p>Je suis un développeur web passionné avec plus de 5 ans d'expérience dans la création de sites web et d'applications. Spécialisé en front-end development, je maîtrise HTML, CSS, JavaScript et plusieurs frameworks modernes.</p>
-                    <p>Mon objectif est de créer des interfaces utilisateur intuitives et esthétiques qui offrent une expérience exceptionnelle. Je suis constamment à l'affût des nouvelles tendances et technologies pour proposer des solutions innovantes.</p>
-                    <p>Lorsque je ne code pas, j'aime partager mes connaissances à travers des tutoriels et participer à des projets open source.</p>
+<!-- Header et Footer seront chargés dynamiquement par include.js -->
+
+<!-- About Section -->
+<section id="a-propos" class="about">
+    <div class="container">
+        <h2 class="section-title">À propos de moi</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Qui suis-je?</h3>
+                <p>Je suis un développeur web passionné avec plus de 5 ans d'expérience dans la création de sites web et d'applications. Spécialisé en front-end development, je maîtrise HTML, CSS, JavaScript et plusieurs frameworks modernes.</p>
+                <p>En plus du développement web, je développe également des applications desktop en utilisant Java avec SWING pour les interfaces graphiques et le framework Spring pour l'architecture backend. Cette combinaison me permet de créer des applications robustes et performantes pour différents environnements.</p>
+                <p>Mon objectif est de créer des interfaces utilisateur intuitives et esthétiques qui offrent une expérience exceptionnelle, qu'elles soient web ou desktop. Je suis constamment à l'affût des nouvelles tendances et technologies pour proposer des solutions innovantes.</p>
+                <p>Lorsque je ne code pas, j'aime partager mes connaissances à travers des tutoriels et participer à des projets open source.</p>
+
+                <div class="personal-info">
+                    <div class="info-item">
+                        <i class="fas fa-user"></i>
+                        <span><strong>Nom:</strong> John Doe</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span><strong>Email:</strong> john.doe@example.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span><strong>Localisation:</strong> Paris, France</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span><strong>Éducation:</strong> Ingénieur en Informatique</span>
+                    </div>
                 </div>
-                <div class="skills">
-                    <div class="skill">
-                        <div class="skill-name">
-                            <span>HTML/CSS</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 95%;"></div>
-                        </div>
+
+                <div class="cta-section">
+                    <a href="contact.html" class="btn">Me contacter</a>
+                    <a href="portfolio.html" class="btn btn-outline">Voir mon portfolio</a>
+                </div>
+            </div>
+
+            <div class="skills">
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>HTML/CSS</span>
+                        <span>95%</span>
                     </div>
-                    <div class="skill">
-                        <div class="skill-name">
-                            <span>JavaScript</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 90%;"></div>
-                        </div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 95%;"></div>
                     </div>
-                    <div class="skill">
-                        <div class="skill-name">
-                            <span>React</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 85%;"></div>
-                        </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>JavaScript</span>
+                        <span>40%</span>
                     </div>
-                    <div class="skill">
-                        <div class="skill-name">
-                            <span>UI/UX Design</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 80%;"></div>
-                        </div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 40%;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>React</span>
+                        <span>10%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 10%;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>UI/UX Design</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>Node.js</span>
+                        <span>30%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 30%;"></div>
+                    </div>
+                </div>
+                <!-- Compétences ajoutées -->
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>Java (SWING)</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>Spring</span>
+                        <span>65%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 65%;"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <script src="include.js"></script>
-    <script src="script.js"></script>
+        </div>
+    </div>
+</section>
+
+<!-- Nouvelle section: Expérience -->
+<section id="experience" class="experience">
+    <div class="container">
+        <h2 class="section-title">Mon expérience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2020 - Présent</div>
+                <div class="timeline-content">
+                    <h3>Développeur Front-end Senior</h3>
+                    <h4>Google - Paris, France</h4>
+                    <p>Développement d'interfaces utilisateur avancées avec React et TypeScript. Collaboration avec les designers UX pour créer des expériences utilisateur exceptionnelles.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2018 - 2020</div>
+                <div class="timeline-content">
+                    <h3>Développeur Web Full-stack</h3>
+                    <h4>Facebook - Menlo Park, CA</h4>
+                    <p>Travail sur des applications web à grande échelle avec React, Node.js et GraphQL. Optimisation des performances et amélioration de l'accessibilité.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2016 - 2018</div>
+                <div class="timeline-content">
+                    <h3>Développeur Front-end</h3>
+                    <h4>Amazon - Seattle, WA</h4>
+                    <p>Création de composants réutilisables avec Vue.js. Intégration de designs responsives et optimisation des performances web.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Nouvelle section: Valeurs -->
+<section id="values" class="values">
+    <div class="container">
+        <h2 class="section-title">Mes valeurs</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Innovation</h3>
+                <p>Je crois en l'innovation constante et en l'adoption de nouvelles technologies pour résoudre des problèmes complexes.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Collaboration</h3>
+                <p>Le travail d'équipe et la communication ouverte sont essentiels pour créer des produits exceptionnels.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Excellence</h3>
+                <p>Je m'efforce d'atteindre l'excellence dans chaque projet en mettant l'accent sur la qualité et les détails.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="include.js"></script>
+<script src="script.js"></script>
+<script src="a-propos.js"></script>
 </body>
 </html>
