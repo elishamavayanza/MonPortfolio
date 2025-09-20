@@ -4,41 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Portfolio | Services</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="services.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
 </head>
 <body class="light-mode">
-    <!-- Header sera chargé dynamiquement par include.js -->
-    
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">Mes services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">💻</div>
-                    <h3>Développement Web</h3>
-                    <p>Création de sites web responsives et modernes avec les dernières technologies pour une expérience utilisateur optimale.</p>
+<!-- Header sera chargé dynamiquement par include.js -->
+
+<!-- Services Section -->
+<section id="services" class="services">
+    <div class="container">
+        <h2 class="section-title">Mes services</h2>
+        <div class="services-intro">
+            <p>Découvrez l'ensemble de mes compétences et services professionnels. Je m'engage à fournir des solutions de qualité adaptées à vos besoins spécifiques.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" data-service="web-dev">
+                <div class="service-icon">💻</div>
+                <h3>Développement Web</h3>
+                <p>Création de sites web responsives et modernes avec les dernières technologies pour une expérience utilisateur optimale.</p>
+                <div class="service-details">
+                    <ul>
+                        <li>Applications web sur mesure</li>
+                        <li>Sites vitrine et e-commerce</li>
+                        <li>Optimisation des performances</li>
+                        <li>SEO et accessibilité</li>
+                    </ul>
+                    <button class="btn service-btn" data-service="web-dev">En savoir plus</button>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">🎨</div>
-                    <h3>Design UI/UX</h3>
-                    <p>Conception d'interfaces utilisateur intuitives et esthétiques qui améliorent l'engagement et la satisfaction des utilisateurs.</p>
+            </div>
+            <div class="service-card" data-service="ui-ux">
+                <div class="service-icon">🎨</div>
+                <h3>Design UI/UX</h3>
+                <p>Conception d'interfaces utilisateur intuitives et esthétiques qui améliorent l'engagement et la satisfaction des utilisateurs.</p>
+                <div class="service-details">
+                    <ul>
+                        <li>Wireframing et prototypage</li>
+                        <li>Design d'interfaces utilisateur</li>
+                        <li>Tests d'utilisabilité</li>
+                        <li>Systèmes de design</li>
+                    </ul>
+                    <button class="btn service-btn" data-service="ui-ux">En savoir plus</button>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">📱</div>
-                    <h3>Applications Mobiles</h3>
-                    <p>Développement d'applications mobiles cross-platform performantes et adaptées à tous les appareils.</p>
+            </div>
+            <div class="service-card" data-service="mobile">
+                <div class="service-icon">📱</div>
+                <h3>Applications Mobiles</h3>
+                <p>Développement d'applications mobiles cross-platform performantes et adaptées à tous les appareils.</p>
+                <div class="service-details">
+                    <ul>
+                        <li>Applications iOS et Android</li>
+                        <li>Applications hybrides</li>
+                        <li>Intégration API</li>
+                        <li>Maintenance et mises à jour</li>
+                    </ul>
+                    <button class="btn service-btn" data-service="mobile">En savoir plus</button>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Footer sera chargé dynamiquement par include.js -->
+        <!-- Section pour les témoignages -->
+        <section class="testimonials">
+            <h2 class="section-title">Témoignages</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-slider">
+                    <div class="testimonial active">
+                        <div class="testimonial-content">
+                            <p>"Le travail réalisé dépasse mes attentes. L'attention portée aux détails et la qualité du code sont remarquables."</p>
+                            <div class="testimonial-author">
+                                <h4>Marie Dubois</h4>
+                                <p>Directrice Marketing, TechCorp</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"La collaboration a été fluide du début à la fin. Le résultat final est non seulement fonctionnel mais aussi esthétiquement impressionnant."</p>
+                            <div class="testimonial-author">
+                                <h4>Jean Martin</h4>
+                                <p>PDG, InnovateStart</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-content">
+                            <p>"La réactivité et le professionnalisme sont au rendez-vous. Je recommande vivement ses services pour tout projet digital ambitieux."</p>
+                            <div class="testimonial-author">
+                                <h4>Sophie Lambert</h4>
+                                <p>Responsable E-commerce, ShopOnline</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-nav">
+                    <button class="prev-testimonial"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next-testimonial"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
 
-    <script src="include.js"></script>
-    <script src="script.js"></script>
+        <!-- Section CTA -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Prêt à démarrer votre projet ?</h2>
+                <p>Contactez-moi dès aujourd'hui pour discuter de vos besoins et obtenir un devis personnalisé.</p>
+                <a href="contact.html" class="btn cta-btn">Me contacter</a>
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- Modale pour les détails des services -->
+<div id="service-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="modal-service-details">
+            <!-- Contenu chargé dynamiquement -->
+        </div>
+    </div>
+</div>
+
+<!-- Footer sera chargé dynamiquement par include.js -->
+
+<script src="include.js"></script>
+<script src="script.js"></script>
+<script src="services.js"></script>
 </body>
 </html>
