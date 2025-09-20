@@ -496,4 +496,39 @@ document.addEventListener('DOMContentLoaded', function() {
             imageContainer.innerHTML = '<div class="no-image">Aucune image pour cette publication</div>';
         }
     }
+
+    // Gestion du formulaire de newsletter dans le footer
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const emailInput = this.querySelector('input[type="email"]');
+            const messageDiv = document.getElementById('newsletter-message');
+            const email = emailInput.value.trim();
+
+            // Validation simple de l'email
+            if (email && email.includes('@') && email.includes('.')) {
+                // Simuler l'abonnement (dans une vraie application, cela enverrait une requête au serveur)
+                messageDiv.textContent = 'Merci pour votre abonnement !';
+                messageDiv.style.color = '#2ecc71';
+                emailInput.value = '';
+
+                // Enregistrer l'email dans localStorage (à des fins de démonstration)
+                let subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers') || '[]');
+                if (!subscribers.includes(email)) {
+                    subscribers.push(email);
+                    localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+                }
+            } else {
+                messageDiv.textContent = 'Veuillez entrer une adresse email valide.';
+                messageDiv.style.color = '#e74c3c';
+            }
+
+            // Effacer le message après 5 secondes
+            setTimeout(() => {
+                messageDiv.textContent = '';
+            }, 5000);
+        });
+    }
 });
