@@ -1169,6 +1169,155 @@ footer {
 
 }
 
+/* Ajout d'une media query spécifique pour l'Asus Zenbook Fold */
+@media screen and (max-width: 853px) and (max-height: 1280px) {
+    .hero {
+        height: auto;
+        min-height: 80vh;
+        padding: 60px 0 40px;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 230px; /* Ajout d'un espace entre le texte et l'image */
+    }
+
+    .hero-text {
+        margin-bottom: 0;
+        padding: 0 15px;
+        order: 1; /* Texte en premier */
+    }
+
+    .hero-text h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+
+    .hero-text p {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+    }
+
+    .hero-image {
+        margin-top: 0;
+        order: 2; /* Image en dessous du texte */
+    }
+
+    .slider-image {
+        max-width: 400px; /* Augmentation de la taille */
+        max-height: 400px; /* Augmentation de la taille */
+    }
+
+    .btn {
+        padding: 10px 25px;
+        font-size: 0.95rem;
+    }
+}
+/* Ajout d'une media query spécifique pour le Surface Pro 7 */
+@media screen and (max-width: 912px) and (max-height: 1368px) {
+    .hero {
+        height: auto;
+        min-height: 85vh;
+        padding: 70px 0 50px;
+    }
+
+    .hero-content {
+        flex-direction: row; /* Retour à la disposition horizontale */
+        align-items: center;
+        padding: 30px 0;
+        gap: 40px; /* Espace entre le texte et l'image */
+    }
+
+    .hero-text {
+        margin-bottom: 0;
+        padding: 0;
+        order: 1; /* Texte à gauche */
+        flex: 1;
+    }
+
+    .hero-text h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 20px;
+    }
+
+    .hero-text p {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+    }
+
+    .hero-image {
+        margin-top: 0;
+        order: 2; /* Image à droite */
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slider-image {
+        max-width: 400px; /* Taille adaptée à l'écran */
+        max-height: 400px; /* Taille adaptée à l'écran */
+    }
+
+    .btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+/* Ajout d'une media query spécifique pour le Surface Duo */
+@media screen and (max-width: 540px) and (max-height: 720px) {
+    .hero {
+        height: auto;
+        min-height: 70vh;
+        padding: 50px 0 30px;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 40px; /* Espace modéré entre le texte et l'image */
+    }
+
+    .hero-text {
+        margin-bottom: 0;
+        padding: 0 15px;
+        order: 1; /* Texte en premier */
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-bottom: 12px;
+    }
+
+    .hero-text p {
+        font-size: 1.05rem;
+        margin-bottom: 18px;
+    }
+
+    .hero-image {
+        margin-top: 0;
+        order: 2; /* Image en dessous du texte */
+    }
+
+    .slider-image {
+        max-width: 370px; /* Taille adaptée à l'écran */
+        max-height: 370px; /* Taille adaptée à l'écran */
+    }
+
+    .btn {
+        padding: 10px 22px;
+        font-size: 0.9rem;
+    }
+}
+
+
 /* Media Query pour les petits écrans */
 @media screen and (max-width: 576px) {
     .container {
@@ -1204,8 +1353,8 @@ footer {
     }
 
     .slider-image {
-        max-width: 200px;
-        max-height: 200px;
+        max-width: 300px;
+        max-height: 300px;
     }
 
     .daily-posts {
@@ -1240,6 +1389,55 @@ footer {
 
     .post-content {
         padding: 15px;
+    }
+}
+
+
+/* Ajout d'une media query spécifique pour le Galaxy Z Fold 5 */
+@media screen and (max-width: 344px) and (max-height: 882px) {
+    .hero {
+        height: auto;
+        min-height: 80vh;
+        padding: 40px 0 30px;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 0;
+        gap: 50px; /* Espace réduit entre le texte et l'image */
+    }
+
+    .hero-text {
+        margin-bottom: 0;
+        padding: 0 10px;
+        order: 1; /* Texte en premier */
+    }
+
+    .hero-text h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+        margin-bottom: 10px;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    .hero-image {
+        margin-top: 0;
+        order: 2; /* Image en dessous du texte */
+    }
+
+    .slider-image {
+        max-width: 270px; /* Taille adaptée à l'écran étroit */
+        max-height: 270px; /* Taille adaptée à l'écran étroit */
+    }
+
+    .btn {
+        padding: 8px 20px;
+        font-size: 0.9rem;
     }
 }
 

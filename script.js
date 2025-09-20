@@ -82,6 +82,64 @@ function setupThemeToggle() {
     }
 }
 
+// Fonction pour gérer l'abonnement à la newsletter
+function setupNewsletterForm() {
+    const newsletterForm = document.getElementById('newsletter-form');
+    const newsletterMessage = document.getElementById('newsletter-message');
+
+    if (!newsletterForm || !newsletterMessage) return;
+
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const emailInput = this.querySelector('input[type="email"]');
+        const email = emailInput.value.trim();
+
+        // Validation simple de l'email
+        if (!email || !isValidEmail(email)) {
+            showMessage(newsletterMessage, 'Veuillez entrer une adresse email valide.', 'error');
+            return;
+        }
+
+        // Simuler l'envoi de l'email (dans une vraie application, vous feriez un appel API)
+        // Vérifier si l'email est déjà enregistré
+        let subscribedEmails = JSON.parse(localStorage.getItem('subscribedEmails') || '[]');
+
+        if (subscribedEmails.includes(email)) {
+            showMessage(newsletterMessage, 'Cet email est déjà abonné à la newsletter.', 'error');
+            return;
+        }
+
+        // Ajouter l'email aux abonnés
+        subscribedEmails.push(email);
+        localStorage.setItem('subscribedEmails', JSON.stringify(subscribedEmails));
+
+        // Afficher un message de succès
+        showMessage(newsletterMessage, 'Merci pour votre abonnement à notre newsletter!', 'success');
+
+        // Réinitialiser le formulaire
+        newsletterForm.reset();
+    });
+}
+
+// Fonction pour valider l'email
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Fonction pour afficher les messages
+function showMessage(container, message, type) {
+    container.textContent = message;
+    container.className = type === 'error' ? 'error-message' : 'success-message';
+
+    // Effacer le message après 5 secondes
+    setTimeout(() => {
+        container.textContent = '';
+        container.className = '';
+    }, 5000);
+}
+
 // Fonction pour charger les publications depuis le localStorage
 function loadPostsFromLocalStorage() {
     const postsContainer = document.getElementById('posts-container');
@@ -198,6 +256,7 @@ function applyReadMoreFunctionality() {
     postCards.forEach((card, index) => {
         // Rendre la carte cliquable
         card.style.cursor = 'pointer';
+
 
         card.addEventListener('click', function(e) {
             // Ne pas déclencher si on clique sur le bouton "voir plus"
