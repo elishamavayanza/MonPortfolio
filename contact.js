@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
 
+    // Initialiser EmailJS avec votre User ID
+    emailjs.init("S8Bqf-etacOsofoWL"); // Remplacer par votre User ID EmailJS
+
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -24,9 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Simuler l'envoi du message
-            // Dans une vraie application, vous feriez un appel API ici
-            simulateFormSubmission(name, email, subject, message);
+            // Envoyer le message via EmailJS
+            sendEmail(name, email, subject, message);
         });
     }
 });
@@ -49,26 +51,47 @@ function showMessage(container, message, type) {
     }, 5000);
 }
 
-// Fonction pour simuler l'envoi du formulaire
-function simulateFormSubmission(name, email, subject, message) {
+// Fonction pour envoyer l'e-mail via EmailJS
+function sendEmail(name, subject, email, message) {
     const formMessage = document.getElementById('formMessage');
 
     // Désactiver le bouton pendant l'envoi
-    const submitButton = document.querySelector('.contact-form .btn');
+    const submitButton = document.querySelector('#contactForm .btn');
     const originalText = submitButton.textContent;
     submitButton.textContent = 'Envoi en cours...';
     submitButton.disabled = true;
 
-    // Simuler un délai d'envoi
-    setTimeout(() => {
-        // Réactiver le bouton
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
+    // Paramètres de l'e-mail - CORRIGÉ selon votre template EmailJS
+    const templateParams = {
+        name: name,        // Doit correspondre au nom dans votre template EmailJS
+        subject: subject,  // Doit correspondre au nom dans votre template EmailJS
+        email: email,      // Doit correspondre au nom dans votre template EmailJS
+        message: message,  // Doit correspondre au nom dans votre template EmailJS
+        to_email: "vayanzaelishama@gmail.com"
+    };
 
-        // Afficher un message de succès
-        showMessage(formMessage, 'Message envoyé avec succès! Je vous répondrai dans les plus brefs délais.', 'success');
+    // Envoyer l'e-mail via EmailJS - CORRIGÉ
+    emailjs.send("service_97oceub", "template_g6mab0e", templateParams)
+        .then(function(response) {
+            // Réactiver le bouton
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
 
-        // Réinitialiser le formulaire
-        document.getElementById('contactForm').reset();
-    }, 2000);
+            // Afficher un message de succès
+            showMessage(formMessage, 'Message envoyé avec succès! Je vous répondrai dans les plus brefs délais.', 'success');
+
+            // Réinitialiser le formulaire
+            document.getElementById('contactForm').reset();
+
+            console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+            // Réactiver le bouton
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+
+            // Afficher un message d'erreur
+            showMessage(formMessage, 'Erreur lors de l\'envoi du message. Veuillez réessayer plus tard.', 'error');
+
+            console.log('FAILED...', error);
+        });
 }
