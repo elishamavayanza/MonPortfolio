@@ -1,65 +1,47 @@
 // Données des projets du portfolio
 const portfolioData = {
     1: {
-        title: "Site E-commerce",
-        category: "Développement Web",
-        description: "Plateforme e-commerce complète avec système de paiement et gestion de produits.",
-        details: "Ce projet a été développé pour une entreprise de vente en ligne. Il comprend un système de gestion de produits avancé, un panier d'achat intelligent, un système de paiement sécurisé et une interface administrateur complète.",
-        technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL"],
-        image: "image/image1.png",
+        title: "AssociationiSoft - Desktop",
+        category: "Applications Desktop",
+        description: "Application desktop (JavaFX) pour la gestion complète d’associations et communautés.",
+        details: "Version desktop de AssociationiSoft, conçue avec JavaFX. Elle permet la gestion des membres, cotisations, dettes, prêts, rôles et permissions, ainsi que l’organisation d’événements et la communication avec les adhérents. Idéale pour une utilisation locale et sécurisée.",
+        technologies: ["Java 17+", "JavaFX", "Spring Boot", "Hibernate", "MySQL/SQLite"],
+        image: "image/assoc.png",
         liveUrl: "#",
         githubUrl: "#"
     },
     2: {
-        title: "Application Fitness",
-        category: "Applications Mobiles",
-        description: "Application de suivi d'activité physique avec tableau de bord personnalisé.",
-        details: "Cette application mobile permet aux utilisateurs de suivre leurs activités physiques quotidiennes, de définir des objectifs et de visualiser leurs progrès grâce à un tableau de bord interactif.",
-        technologies: ["React Native", "Firebase", "Redux"],
-        image: "image/image2.png",
+        title: "AssociationiSoft - Web",
+        category: "Développement Web",
+        description: "Application web moderne pour gérer n'importe quel type d’association.",
+        details: "Version web de AssociationiSoft développée avec React et Spring Boot. Elle offre une interface intuitive et responsive, avec des fonctionnalités de gestion des cotisations, prêts, rôles, événements et communication en ligne. Accessible depuis tout navigateur.",
+        technologies: ["React", "Spring Boot 3+", "Spring Data JPA", "Hibernate", "MySQL"],
+        image: "image/assoc.png",
         liveUrl: "#",
         githubUrl: "#"
     },
     3: {
-        title: "Site Corporatif",
-        category: "Développement Web",
-        description: "Refonte complète du site web d'une entreprise avec intégration CMS.",
-        details: "Refonte complète du site web d'une entreprise avec intégration d'un système de gestion de contenu (CMS) personnalisé permettant à l'entreprise de mettre à jour facilement son contenu.",
-        technologies: ["HTML5", "CSS3", "JavaScript", "WordPress", "PHP"],
-        image: "image/image3.png",
+        title: "AssociationiSoft - Mobile",
+        category: "Applications Mobiles",
+        description: "Application mobile (Flutter) pour gérer les contributions et dettes associatives en déplacement.",
+        details: "Version mobile de AssociationiSoft, développée avec Flutter. Elle permet aux membres et gestionnaires d’accéder aux informations, de suivre les contributions, dettes et activités, et de recevoir des notifications en temps réel.",
+        technologies: ["Flutter", "Dart", "Firebase", "Spring Boot API"],
+        image: "image/assoc.png",
         liveUrl: "#",
         githubUrl: "#"
     },
     4: {
-        title: "Application de Gestion",
-        category: "Développement Web",
-        description: "Système de gestion complète pour une entreprise avec reporting en temps réel.",
-        details: "Application web complète de gestion d'entreprise avec modules RH, finances, inventaire et reporting en temps réel. Interface administrateur complète avec droits d'accès différenciés.",
-        technologies: ["Vue.js", "Node.js", "Express", "MongoDB"],
-        image: "image/image4.png",
-        liveUrl: "#",
-        githubUrl: "#"
-    },
-    5: {
-        title: "App de Réservation",
-        category: "Applications Mobiles",
-        description: "Application mobile de réservation pour hôtels avec système de paiement intégré.",
-        details: "Application mobile permettant aux utilisateurs de rechercher, comparer et réserver des chambres d'hôtel. Intègre un système de paiement sécurisé et un système de notation des établissements.",
-        technologies: ["Flutter", "Dart", "Firebase", "Stripe API"],
-        image: "image/image5.png",
-        liveUrl: "#",
-        githubUrl: "#"
-    },
-    6: {
-        title: "Logiciel de Comptabilité",
+        title: "AVECSOFT - Gestion d'Association d'Épargne et Crédit",
         category: "Applications Desktop",
-        description: "Logiciel desktop pour la gestion comptable d'une PME avec reporting avancé.",
-        details: "Logiciel desktop conçu pour la gestion comptable des PME. Inclut des fonctionnalités de facturation, de gestion des dépenses, de génération de rapports et d'analyses financières.",
-        technologies: ["Electron", "React", "Node.js", "SQLite"],
-        image: "image/image6.png",
+        description: "Application desktop pour la gestion d'une association d'épargne et crédit.",
+        details: "AVECSOFT est un logiciel desktop conçu pour faciliter la gestion d'une association d'épargne et crédit. Il permet de gérer les membres, contributions, emprunts, remboursements, rapports financiers et statistiques, tout en offrant une interface intuitive et un suivi en temps réel.",
+        technologies: ["Java", "Swing", "MySQL", "Maven"],
+        image: "image/avecsoft.png",
         liveUrl: "#",
         githubUrl: "#"
     }
+
+
 };
 
 // Attendre que le DOM soit chargé

@@ -846,6 +846,7 @@ nav {
     list-style: none;
 }
 
+/* Ajout de styles spécifiques pour les étiquettes de technologies */
 .technologies li {
     background: var(--light-bg);
     padding: 8px 20px;
@@ -853,7 +854,32 @@ nav {
     font-size: 0.9rem;
     font-weight: 500;
     box-shadow: var(--shadow-light);
+    color: var(--text-color); /* Ajout de la couleur du texte */
+    transition: all 0.3s ease; /* Ajout de transition pour un effet fluide */
 }
+
+/* Styles spécifiques pour le mode sombre */
+.dark-mode .technologies li {
+    background: rgba(255, 255, 255, 0.1); /* Fond semi-transparent en mode sombre */
+    color: white; /* Texte blanc en mode sombre */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure légère pour améliorer la lisibilité */
+}
+
+/* Amélioration de la lisibilité en mode sombre */
+.dark-mode .technologies li:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Effets de survol pour le mode clair */
+.technologies li:hover {
+    background: #d5dbdb; /* Fond légèrement plus foncé en mode clair */
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
+}
+
+
 
 .project-links {
     display: flex;
