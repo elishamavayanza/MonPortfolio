@@ -84,24 +84,30 @@ function initFiltering() {
     const portfolioItems = document.querySelectorAll('.portfolio-item');
 
     filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Retirer la classe active de tous les boutons
-            filterBtns.forEach(b => b.classList.remove('active'));
+        // Vérifier si l'écouteur d'événement a déjà été attaché
+        if (!btn.dataset.listenerAttached) {
+            btn.addEventListener('click', function() {
+                // Retirer la classe active de tous les boutons
+                filterBtns.forEach(b => b.classList.remove('active'));
 
-            // Ajouter la classe active au bouton cliqué
-            this.classList.add('active');
+                // Ajouter la classe active au bouton cliqué
+                this.classList.add('active');
 
-            const filter = this.getAttribute('data-filter');
+                const filter = this.getAttribute('data-filter');
 
-            // Filtrer les éléments
-            portfolioItems.forEach(item => {
-                if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
+                // Filtrer les éléments
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
             });
-        });
+
+            // Marquer le bouton comme ayant un écouteur d'événement attaché
+            btn.dataset.listenerAttached = 'true';
+        }
     });
 }
 
@@ -207,5 +213,20 @@ function initAnimations() {
 
     portfolioItems.forEach(item => {
         observer.observe(item);
+    });
+}
+
+// Fonction pour filtrer les projets
+function filterProjects(category) {
+    const projects = document.querySelectorAll('.portfolio-item');
+
+    projects.forEach(project => {
+        const projectCategory = project.getAttribute('data-category');
+
+        if (category === 'all' || projectCategory === category) {
+            project.style.display = 'block';
+        } else {
+            project.style.display = 'none';
+        }
     });
 }

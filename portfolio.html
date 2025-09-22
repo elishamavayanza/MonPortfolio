@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Portfolio | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="portfolio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
@@ -17,11 +17,20 @@
     <div class="container">
         <h2 class="section-title">Mon portfolio</h2>
         <div class="portfolio-filter">
-            <button class="filter-btn active" data-filter="all">Tous</button>
-            <button class="filter-btn" data-filter="Développement Web">Développement Web</button>
-            <button class="filter-btn" data-filter="Applications Mobiles">Applications Mobiles</button>
-            <button class="filter-btn" data-filter="Applications Desktop">Applications Desktop</button>
+            <button class="filter-btn active" data-filter="all">
+                <i class="fas fa-th-large"></i> Tous
+            </button>
+            <button class="filter-btn" data-filter="Développement Web">
+                <i class="fas fa-laptop-code"></i> Développement Web
+            </button>
+            <button class="filter-btn" data-filter="Applications Mobiles">
+                <i class="fas fa-mobile-alt"></i> Applications Mobiles
+            </button>
+            <button class="filter-btn" data-filter="Applications Desktop">
+                <i class="fas fa-desktop"></i> Applications Desktop
+            </button>
         </div>
+
         <div class="portfolio-grid">
             <div class="portfolio-item" data-category="Développement Web">
                 <img src="image/image1.png" alt="Projet 1">
