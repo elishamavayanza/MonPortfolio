@@ -52,7 +52,7 @@ function showMessage(container, message, type) {
 }
 
 // Fonction pour envoyer l'e-mail via EmailJS
-function sendEmail(name, subject, email, message) {
+function sendEmail(name, email, subject, message) {
     const formMessage = document.getElementById('formMessage');
 
     // Désactiver le bouton pendant l'envoi
