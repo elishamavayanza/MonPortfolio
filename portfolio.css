@@ -937,6 +937,7 @@ nav {
     }
 }
 
+
 @media (max-width: 576px) {
     .portfolio-grid {
         grid-template-columns: 1fr;
