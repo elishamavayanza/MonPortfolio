@@ -106,10 +106,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
 
-            // Créer l'overlay pour le menu mobile
-            const menuOverlay = document.createElement('div');
-            menuOverlay.className = 'menu-overlay';
-            document.body.appendChild(menuOverlay);
+            // Utiliser l'overlay existant au lieu d'en créer un nouveau
+            const menuOverlay = document.getElementById("menu-overlay");
+
+            if (!menuOverlay) {
+                console.error("Overlay du menu mobile non trouvé");
+                return;
+            }
 
             // Gérer l'ouverture/fermeture du menu
             menuToggle.addEventListener("click", function() {
@@ -137,4 +140,5 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }, 100);
     }
+
 });

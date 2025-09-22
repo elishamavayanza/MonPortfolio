@@ -10,41 +10,85 @@
 
 </head>
 <body class="light-mode">
-    <!-- Header sera chargé dynamiquement par include.js -->
-    
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <h2 class="section-title">Mon portfolio</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="image/image1.png" alt="Projet 1">
-                    <div class="portfolio-overlay">
-                        <h3>Site E-commerce</h3>
-                        <p>Plateforme e-commerce complète avec système de paiement et gestion de produits.</p>
-                    </div>
+<!-- Header sera chargé dynamiquement par include.js -->
+
+<!-- Portfolio Section -->
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <h2 class="section-title">Mon portfolio</h2>
+        <div class="portfolio-filter">
+            <button class="filter-btn active" data-filter="all">Tous</button>
+            <button class="filter-btn" data-filter="Développement Web">Développement Web</button>
+            <button class="filter-btn" data-filter="Applications Mobiles">Applications Mobiles</button>
+            <button class="filter-btn" data-filter="Applications Desktop">Applications Desktop</button>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item" data-category="Développement Web">
+                <img src="image/image1.png" alt="Projet 1">
+                <div class="portfolio-overlay">
+                    <h3>Site E-commerce</h3>
+                    <p>Plateforme e-commerce complète avec système de paiement et gestion de produits.</p>
+                    <button class="btn view-project" data-id="1">Voir détails</button>
                 </div>
-                <div class="portfolio-item">
-                    <img src="image/image2.png" alt="Projet 2">
-                    <div class="portfolio-overlay">
-                        <h3>Application Fitness</h3>
-                        <p>Application de suivi d'activité physique avec tableau de bord personnalisé.</p>
-                    </div>
+            </div>
+            <div class="portfolio-item" data-category="Applications Mobiles">
+                <img src="image/image2.png" alt="Projet 2">
+                <div class="portfolio-overlay">
+                    <h3>Application Fitness</h3>
+                    <p>Application de suivi d'activité physique avec tableau de bord personnalisé.</p>
+                    <button class="btn view-project" data-id="2">Voir détails</button>
                 </div>
-                <div class="portfolio-item">
-                    <img src="image/image3.png" alt="Projet 3">
-                    <div class="portfolio-overlay">
-                        <h3>Site Corporatif</h3>
-                        <p>Refonte complète du site web d'une entreprise avec intégration CMS.</p>
-                    </div>
+            </div>
+            <div class="portfolio-item" data-category="Développement Web">
+                <img src="image/image3.png" alt="Projet 3">
+                <div class="portfolio-overlay">
+                    <h3>Site Corporatif</h3>
+                    <p>Refonte complète du site web d'une entreprise avec intégration CMS.</p>
+                    <button class="btn view-project" data-id="3">Voir détails</button>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="Développement Web">
+                <img src="image/image4.png" alt="Projet 4">
+                <div class="portfolio-overlay">
+                    <h3>Application de Gestion</h3>
+                    <p>Système de gestion complète pour une entreprise avec reporting en temps réel.</p>
+                    <button class="btn view-project" data-id="4">Voir détails</button>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="Applications Mobiles">
+                <img src="image/image5.png" alt="Projet 5">
+                <div class="portfolio-overlay">
+                    <h3>App de Réservation</h3>
+                    <p>Application mobile de réservation pour hôtels avec système de paiement intégré.</p>
+                    <button class="btn view-project" data-id="5">Voir détails</button>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="Applications Desktop">
+                <img src="image/image6.png" alt="Projet 6">
+                <div class="portfolio-overlay">
+                    <h3>Logiciel de Comptabilité</h3>
+                    <p>Logiciel desktop pour la gestion comptable d'une PME avec reporting avancé.</p>
+                    <button class="btn view-project" data-id="6">Voir détails</button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer sera chargé dynamiquement par include.js -->
+<!-- Portfolio Modal -->
+<div id="portfolio-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modal-body">
+            <!-- Contenu chargé dynamiquement -->
+        </div>
+    </div>
+</div>
 
-    <script src="include.js"></script>
-    <script src="script.js"></script>
+<!-- Footer sera chargé dynamiquement par include.js -->
+
+<script src="include.js"></script>
+<script src="portfolio.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
