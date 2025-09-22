@@ -4,66 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Portfolio | Contact</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contact.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 </head>
 <body class="light-mode">
-    <!-- Header sera chargé dynamiquement par include.js -->
-    
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Me contacter</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-info-item">
-                        <div class="contact-icon">📧</div>
-                        <div>
-                            <h3>Email</h3>
-                            <p>contact@monportfolio.com</p>
-                        </div>
+<!-- Header sera chargé dynamiquement par include.js -->
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+    <div class="container">
+        <h2 class="section-title">Me contacter</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Informations de contact</h3>
+                <div class="contact-info-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
                     </div>
-                    <div class="contact-info-item">
-                        <div class="contact-icon">📱</div>
-                        <div>
-                            <h3>Téléphone</h3>
-                            <p>+33 6 12 34 56 78</p>
-                        </div>
-                    </div>
-                    <div class="contact-info-item">
-                        <div class="contact-icon">📍</div>
-                        <div>
-                            <h3>Adresse</h3>
-                            <p>123 Avenue de la République, 75000 Paris</p>
-                        </div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>vayanza.com</p>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Votre nom" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Votre email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Sujet" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Votre message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Envoyer le message</button>
-                    </form>
+                <div class="contact-info-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h4>Téléphone</h4>
+                        <p>+243 991 471 988</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h4>Adresse</h4>
+                        <p>RDC/Nord-kivu/Butembo/Kimemi/Q.Vutetse/Cel.Ngule</p>
+                    </div>
+                </div>
+                <div class="social-links-contact">
+                    <h4>Suivez-moi</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
             </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" placeholder="Votre email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="subject" placeholder="Sujet" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="message" placeholder="Votre message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Envoyer le message</button>
+                    <div id="formMessage" class="form-message"></div>
+                </form>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer sera chargé dynamiquement par include.js -->
+<!-- Footer sera chargé dynamiquement par include.js -->
 
-    <script src="include.js"></script>
-    <script src="script.js"></script>
+<script src="include.js"></script>
+<script src="script.js"></script>
+<script src="contact.js"></script>
 </body>
 </html>
